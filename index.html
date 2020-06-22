@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&display=swap" rel="stylesheet">
+    <title>Technical Documentation Page</title>
+</head>
+
+<body>
+    <nav id="navbar">
+        <header>
+            <h2 id="type_title">TypeScript MenuBar</h2>
+        </header><br>
+        <ul>
+            <li><a href="#TypeScript_in_5_minutes" class="nav-link">TypeScript in 5 minutes</a></li>
+            <li><a href="#Installing_TypeScript" class="nav-link">Installing TypeScript</a></li>
+            <li><a href="#Building_your_first_TypeScript_file" class="nav-link">Building your first TypeScript file</a>
+            </li>
+            <li><a href="#Compiling_your_code" class="nav-link">Compiling your code</a></li>
+            <li><a href="#Type_annotations" class="nav-link">Type annotations</a></li>
+            <li><a href="#Interfaces" class="nav-link">Interfaces</a></li>
+            <li><a href="#Classes" class="nav-link">Classes</a></li>
+            <li><a href="#Running_your_TypeScript_web_app" class="nav-link">Running your TypeScript web app</a></li>
+        </ul>
+    </nav>
+
+    <div id="main-doc">
+        <section class="main-section" id="TypeScript_in_5_minutes">
+            <header>
+                <h1>TypeScript in 5 minutes</h1>
+            </header>
+            <p>Let’s get started by building a simple web application with TypeScript.</p>
+        </section>
+
+        <section class="main-section" id="Installing_TypeScript">
+            <header>
+                <h3>Installing TypeScript</h3>
+            </header>
+            <p>There are two main ways to get the TypeScript tools:</p>
+            <ul>
+                <li>Via npm (the Node.js package manager)</li>
+                <li>By installing TypeScript’s Visual Studio plugins</li>
+            </ul>
+            <p>Visual Studio 2017 and Visual Studio 2015 Update 3 include TypeScript by default.</p>
+            <p>For NPM users:</p>
+            <code>> npm install -g typescript</code>
+        </section>
+
+        <section class="main-section" id="Building_your_first_TypeScript_file">
+            <header>
+                <h3>Building your first TypeScript file</h3>
+            </header>
+            <p>In your editor, type the following JavaScript code in greeter.ts:</p>
+            <code>function greeter(person) {<br>
+                return "Hello, " + person;<br>
+                } <br>
+                let user = "Jane User";<br>
+                document.body.textContent = greeter(user);</code>
+        </section>
+
+        <section class="main-section" id="Compiling_your_code">
+            <header>
+                <h3>Compiling your code</h3>
+            </header>
+            <p>We used a .ts extension, but this code is just JavaScript.
+                You could have copy/pasted this straight out of an existing JavaScript app.</p>
+            <p>At the command line, run the TypeScript compiler:</p>
+            <code>tsc greeter.ts</code>
+            <p>The result will be a file greeter.js which contains the same JavaScript that you fed in.
+                We’re up and running using TypeScript in our JavaScript app!</p>
+            <p>Now we can start taking advantage of some of the new tools TypeScript offers. Add a :
+                string type annotation to the ‘person’ function argument as shown here:</p>
+            <code>function greeter(person: string) {<br>
+                return "Hello, " + person;<br>
+                } <br>
+                let user = "Jane User";<br>
+                document.body.textContent = greeter(user);</code>
+        </section>
+
+        <section class="main-section" id="Type_annotations">
+            <header>
+                <h3>Type annotations</h3>
+            </header>
+            <p>Type annotations in TypeScript are lightweight ways to record the intended
+                contract of the function or variable. In this case, we intend the greeter
+                function to be called with a single string parameter.
+                We can try changing the call greeter to pass an array instead:</p>
+            <code>function greeter(person: string) {<br>
+                return "Hello, " + person;<br>
+                } <br>
+                let user = [0, 1, 2]; <br>
+                document.body.textContent = greeter(user);</code>
+            <p>Re-compiling, you’ll now see an error:</p>
+            <code>error TS2345: Argument of type 'number[]'
+                is not assignable to parameter of type 'string'.</code>
+            <p>Similarly, try removing all the arguments to the greeter call.
+                TypeScript will let you know that you have called this function
+                with an unexpected number of parameters. In both cases, TypeScript
+                can offer static analysis based on both the structure of your code,
+                and the type annotations you provide.</p>
+            <p>Notice that although there were errors, the greeter.js file is still created.
+                You can use TypeScript even if there are errors in your code. But in this case,
+                TypeScript is warning that your code will likely not run as expected.</p>
+        </section>
+
+        <section class="main-section" id="Interfaces">
+            <header>
+                <h3>Interfaces</h3>
+            </header>
+            <p>Let’s develop our sample further. Here we use an interface that describes
+                objects that have a firstName and lastName field. In TypeScript,
+                two types are compatible if their internal structure is compatible.
+                This allows us to implement an interface just by having the shape
+                the interface requires, without an explicit implements clause.</p>
+            <code>interface Person {<br>
+                firstName: string;<br>
+                lastName: string;<br>
+                } <br>
+                function greeter(person: Person) { <br>
+                return "Hello, " + person.firstName + " " + person.lastName; <br>
+                } <br>
+                let user = { firstName: "Jane", lastName: "User" }; <br>
+                document.body.textContent = greeter(user);</code>
+        </section>
+
+        <section class="main-section" id="Classes">
+            <header>
+                <h3>Classes</h3>
+            </header>
+            <p>Finally, let’s extend the example one last time with classes.
+                TypeScript supports new features in JavaScript, like support
+                for class-based object-oriented programming.</p>
+            <p>Here we’re going to create a Student class with a constructor
+                and a few public fields. Notice that classes and interfaces
+                play well together, letting the programmer decide on the
+                right level of abstraction.</p>
+            <p>Also of note, the use of public on arguments to the constructor
+                is a shorthand that allows us to automatically create properties
+                with that name.</p>
+            <code>class Student { <br>
+                fullName: string; <br>
+                constructor(public firstName: string, public middleInitial: string, public lastName: string) { <br>
+                this.fullName = firstName + " " + middleInitial + " " + lastName; <br>
+                } <br>
+                } <br>
+                interface Person { <br>
+                firstName: string; <br>
+                lastName: string; <br>
+                } <br>
+                function greeter(person: Person) { <br>
+                return "Hello, " + person.firstName + " " + person.lastName; <br>
+                } <br>
+                let user = new Student("Jane", "M.", "User"); <br>
+                document.body.textContent = greeter(user);</code>
+            <p>Re-run tsc greeter.ts and you’ll see the generated JavaScript
+                is the same as the earlier code. Classes in TypeScript are just
+                a shorthand for the same prototype-based OO that is frequently
+                used in JavaScript.</p>
+
+        </section>
+
+        <section class="main-section" id="Running_your_TypeScript_web_app">
+            <header>
+                <h3>Running your TypeScript web app</h3>
+            </header>
+            <p>Now type the following in greeter.html:</p>
+<code class="language-html"><XMP><!DOCTYPE html>
+    <head>
+        <title>TypeScript Greeter</title>
+    </head>
+    <body>
+        <script src="greeter.js"></script>
+    </body>
+</html></XMP></code>
+            <p>Open greeter.html in the browser to run your first
+                simple TypeScript web application!</p>
+            <p>Optional: Open greeter.ts in Visual Studio, or copy the code into
+                the TypeScript playground. You can hover over identifiers to see
+                their types. Notice that in some cases these types are inferred
+                automatically for you. Re-type the last line, and see completion
+                lists and parameter help based on the types of the DOM elements.
+                Put your cursor on the reference to the greeter function, and hit
+                F12 to go to its definition. Notice, too, that you can right-click
+                on a symbol and use refactoring to rename it.</p>
+            <p>The type information provided works together with the tools to work
+                with JavaScript at application scale. For more examples of what’s
+                possible in TypeScript, see the Samples section of the website.</p>
+            <ul>
+                <li>TypeScript is a simple</li>
+                <li>TypeScript is a fun</li>
+                <li>TypeScript is a great</li>
+            </ul>
+            <div>
+                <img src="https://www.typescriptlang.org/assets/images/docs/greet_person.png" alt="another code">
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
